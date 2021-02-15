@@ -12,12 +12,12 @@ titles = pickle.load(open("titles.pkl","rb"))
 indices = pickle.load(open("indices.pkl","rb"))
 
 
-def recommendations(idx):
-    print(idx)
-#     if isinstance(indices[title], pd.core.series.Series):
-#         idx = indices[title][0]
-#     else:
-#         idx = indices[title]
+def recommendations(title):
+    print(title)
+    if isinstance(indices[title], pd.core.series.Series):
+        idx = indices[title][0]
+    else:
+        idx = indices[title]
 
 
     sim_scores = linear_kernel(tfidf_matrix[idx], tfidf_matrix)
@@ -44,7 +44,7 @@ def movie_recommend():
     print(content)
     # print(type(content.decode("utf-8")))
     # print("chi mai ka")
-    result = recommendations(content)
+    result = recommendations(content.strip('\"'))
     result = result.tolist()
     
     return jsonify(result)
